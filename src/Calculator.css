@@ -38,7 +38,19 @@
     width:376px;
     margin-bottom: 12px;
     border-radius: 6px;
+    background-color: #eaecec;
+    color: #000;
+    font-weight: bolder;
+    outline: none;
+    text-align: center;
+    font-size: 26px;
+    user-select: none;
 }
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+}
+
 
 .calculator-buttons{
     height:392px;
