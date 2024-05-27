@@ -315,7 +315,7 @@ export const Calculator=()=>{
                 <div className='calculator-history-holder-hidden' id='calculator_history'>
                     <button className='history-close-button' onClick={closeHistory}>X</button>
                 </div>
-                <input type='number' className='calculator-answer' id='calculator_answer'/>
+                <input type='number' className='calculator-answer' id='calculator_answer' readOnly/>
                 <input type='text' className='calculator-answer-hidden' id='calculator_answer_hidden' />
                 <div className='calculator-buttons' id='calculator_buttons'>
                     <div style={{display:"flex",alignItems:"center", width:"376px", height:"65px"}}>
