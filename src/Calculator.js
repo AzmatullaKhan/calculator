@@ -9,6 +9,10 @@ export const Calculator=()=>{
     let subClicked=false
     let mulClicked=false
 
+    window.addEventListener('beforeunload',(e)=>{
+        e.preventDefault();
+      })
+
     const zeroClicked=()=>{
         document.getElementById('calculator_answer').value=document.getElementById('calculator_answer').value+"0"
     }
@@ -142,6 +146,10 @@ export const Calculator=()=>{
             document.getElementById('calculator_ongoing_hidden').textContent=value1+"÷"
         }
         else{
+
+            let history_div=document.getElementById('calculator_history')
+            let history_p=document.createElement('p')
+
             value2=Number(document.getElementById('calculator_answer').value)
             document.getElementById('calculator_answer').value=Number(value1)/Number(value2)
             divClicked=false
@@ -150,6 +158,9 @@ export const Calculator=()=>{
             document.getElementById('division').className = "calculator-actionButton"
             document.getElementById('addition').className = "calculator-actionButton"
             document.getElementById('calculator_ongoing_hidden').textContent=value1+"÷"+value2
+            history_p.textContent=value1+" ÷ "+value2+" = "+(Number(value1)/Number(value2))
+            history_div.appendChild(history_p)
+            history_div.scrollTop=history_div.scrollHeight
             value1=0
             value2=0
         }
@@ -168,6 +179,10 @@ export const Calculator=()=>{
             document.getElementById('calculator_ongoing_hidden').textContent=value1+"+"
         }
         else{
+
+            let history_div=document.getElementById('calculator_history')
+            let history_p=document.createElement('p')
+
             value2=document.getElementById('calculator_answer').value
             document.getElementById('calculator_answer').value=Number(value1)+Number(value2)
             addClicked=false
@@ -176,6 +191,9 @@ export const Calculator=()=>{
             document.getElementById('division').className = "calculator-actionButton"
             document.getElementById('addition').className = "calculator-actionButton"
             document.getElementById('calculator_ongoing_hidden').textContent=value1+"+"+value2
+            history_p.textContent=value1+" + "+value2+" = "+(Number(value1)+Number(value2))
+            history_div.appendChild(history_p)
+            history_div.scrollTop=history_div.scrollHeight
             value1=0
             value2=0
         }
@@ -194,6 +212,10 @@ export const Calculator=()=>{
             document.getElementById('calculator_ongoing_hidden').textContent=value1+"-"
         }
         else{
+
+            let history_div=document.getElementById('calculator_history')
+            let history_p=document.createElement('p')
+
             value2=document.getElementById('calculator_answer').value
             document.getElementById('calculator_answer').value=Number(value1)-Number(value2)
             subClicked=false
@@ -202,6 +224,9 @@ export const Calculator=()=>{
             document.getElementById('division').className = "calculator-actionButton"
             document.getElementById('addition').className = "calculator-actionButton"
             document.getElementById('calculator_ongoing_hidden').textContent=value1+"-"+value2
+            history_p.textContent=value1+" - "+value2+" = "+(Number(value1)-Number(value2))
+            history_div.appendChild(history_p)
+            history_div.scrollTop=history_div.scrollHeight
             value1=0
             value2=0
 
@@ -221,6 +246,10 @@ export const Calculator=()=>{
             document.getElementById('calculator_ongoing_hidden').textContent=value1+"*"
         }
         else{
+
+            let history_div=document.getElementById('calculator_history')
+            let history_p=document.createElement('p')
+
             value2=document.getElementById('calculator_answer').value
             document.getElementById('calculator_answer').value=Number(value1)*Number(value2)
             mulClicked=false
@@ -229,12 +258,19 @@ export const Calculator=()=>{
             document.getElementById('division').className = "calculator-actionButton"
             document.getElementById('addition').className = "calculator-actionButton"
             document.getElementById('calculator_ongoing_hidden').textContent=value1+"*"+value2
+            history_p.textContent=value1+" * "+value2+" = "+(Number(value1)*Number(value2))
+            history_div.appendChild(history_p)
+            history_div.scrollTop=history_div.scrollHeight
             value1=0
             value2=0
         }
     }
 
     const equalClicked=()=>{
+
+        let history_div=document.getElementById('calculator_history')
+        let history_p=document.createElement('p')
+
         document.getElementById('calculator_ongoing_hidden').textContent=''
         document.getElementById('subtraction').className = "calculator-actionButton"
         document.getElementById('multiplication').className = "calculator-actionButton"
@@ -244,21 +280,36 @@ export const Calculator=()=>{
             value2=document.getElementById('calculator_answer').value
             document.getElementById('calculator_answer').value=Number(value1)/Number(value2)
             divClicked=false
+            history_p.textContent=value1+" ÷ "+value2+" = "+(Number(value1)/Number(value2))
+            history_div.appendChild(history_p)
+            history_div.scrollTop=history_div.scrollHeight
         }
         if(addClicked){
             value2=document.getElementById('calculator_answer').value
             document.getElementById('calculator_answer').value=Number(value1)+Number(value2)
             addClicked=false
+            history_p.textContent=value1+" + "+value2+" = "+(Number(value1)+Number(value2))
+            history_div.appendChild(history_p)
+            history_div.scrollTop=history_div.scrollHeight
+
         }
         if(subClicked){
             value2=document.getElementById('calculator_answer').value
             document.getElementById('calculator_answer').value=Number(value1)-Number(value2)
             subClicked=false
+            history_p.textContent=value1+" - "+value2+" = "+(Number(value1)-Number(value2))
+            history_div.appendChild(history_p)
+            history_div.scrollTop=history_div.scrollHeight
+
         }
         if(mulClicked){
             value2=document.getElementById('calculator_answer').value
             document.getElementById('calculator_answer').value=Number(value1)*Number(value2)
             mulClicked=false
+            history_p.textContent=value1+" * "+value2+" = "+(Number(value1)*Number(value2))
+            history_div.appendChild(history_p)
+            history_div.scrollTop=history_div.scrollHeight
+
         }
     }
 
@@ -267,12 +318,23 @@ export const Calculator=()=>{
         document.getElementById('calculator_answer').value=-1*Number(value1)
     }
 
+    const handleHistory=()=>{
+        document.getElementById('calculator_history').className='calculator-history-holder'
+    }
+
+    const closeHistory=()=>{
+        document.getElementById('calculator_history').className='calculator-history-holder-hidden'
+    }
+
     return(
         <div className='main-container'>
             <div className='calculator-background'>
                 <div className='calculator-history'>
                     Standard Calculator
-                    <img src={require('./images/history.png')} alt='history' className='calculator-historyImg' />
+                    <img src={require('./images/history.png')} alt='history' className='calculator-historyImg' onClick={handleHistory}/>
+                </div>
+                <div className='calculator-history-holder-hidden' id='calculator_history'>
+                    <button className='history-close-button' onClick={closeHistory}>X</button>
                 </div>
                 <input type='number' className='calculator-answer' id='calculator_answer'/>
                 <input type='text' className='calculator-answer-hidden' id='calculator_answer_hidden' />

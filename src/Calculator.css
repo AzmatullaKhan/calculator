@@ -120,3 +120,40 @@ input[type=number]::-webkit-outer-spin-button {
     color: #000;
     font-weight: bolder;
 }
+
+.calculator-history-holder-hidden{
+    display: none;
+}
+.calculator-history-holder{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 12 0px;
+    color: #000;
+    font-weight: bolder;
+    font-size: 18px;
+    background-color: inherit;
+    position: absolute;
+    border: 1px solid #fff;
+    height:490px;
+    width:400px;
+    margin-left:400px ;
+    border-radius: 6px;
+    overflow-y: scroll;
+}
+
+.history-close-button{
+    width:36px;
+    height:26px;
+    background-color: transparent;
+    margin: 0px 2px;
+    font-size: 22px;
+    cursor: pointer;
+    position: sticky;
+    top: 0px;
+    left:360px;
+    font-weight: lighter;
+    border: 1px solid #fff;
+    border-radius: 6px;
+}
