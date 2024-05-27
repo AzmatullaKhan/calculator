@@ -46,6 +46,9 @@
     font-size: 26px;
     user-select: none;
 }
+.calculator-answer-hidden{
+    display: none;
+}
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
   -webkit-appearance: none; 
@@ -79,6 +82,17 @@ input[type=number]::-webkit-outer-spin-button {
     font-weight: bolder;
     font-size: 22px;
     cursor: pointer;
+}
+.calculator-actionButton-selected{
+    width:96px;
+    height:46px;
+    background-color: #eaecec;
+    margin: 0px 2px;
+    border: 1px solid #fff;
+    font-weight: bolder;
+    font-size: 22px;
+    cursor: pointer;
+    color: #000;
 }
 .calculator-actionButton:hover{
     box-shadow:1px -1px 10px #eada32;
