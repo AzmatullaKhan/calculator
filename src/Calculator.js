@@ -53,9 +53,8 @@ export const Calculator=()=>{
         document.getElementById('calculator_answer').value=document.getElementById('calculator_answer').value+"9"
     }
 
-    const dotClicked=()=>{
-        value1=Number(document.getElementById('calculator_answer').value)
-        document.getElementById('calculator_answer').value=value1+(".")
+    const clearAllClicked=()=>{
+        window.location.reload()
     }
 
     const ceClicked=()=>{
@@ -112,26 +111,6 @@ export const Calculator=()=>{
         document.getElementById('calculator_answer').value=Math.sqrt(Number(value1))
         value1=Number(0)
     }
-
-    // const insertIntoHidden=(e)=>{
-    //     console.log('pleassed')
-    //     if((e.key>='0' && e.key<='9')){
-    //         document.getElementById('calculator_answer_hidden').value=String(document.getElementById('calculator_answer').value)
-    //         console.log(document.getElementById('calculator_answer_hidden').value)
-    //     }
-    // }
-
-    // function function_calculate(){
-    //     let key_value=document.getElementById('calculator_answer_hidden').value
-    //     console.log(key_value)
-    // }
-
-    // window.addEventListener("keyup", (e)=>{
-    //     if(e.key==="Enter"){
-    //         function_calculate()
-    //     }
-    // })
-    
 
     const divisionClicked=()=>{
         if(!divClicked){
@@ -372,7 +351,7 @@ export const Calculator=()=>{
                     <div style={{display:"flex",alignItems:"center", width:"376px", height:"65px"}}>
                         <button className='calculator-numberButton' onClick={negateClicked}>+/-</button>
                         <button className='calculator-numberButton' onClick={zeroClicked}>0</button>
-                        <button className='calculator-numberButton' onClick={dotClicked}>.</button>
+                        <button className='calculator-numberButton' onClick={clearAllClicked}>Clear All</button>
                         <button className='calculator-actionButton' onClick={equalClicked} style={{backgroundColor:"#eaecec", color:"#000"}}>=</button>
                     </div>
                 </div>
