@@ -3,8 +3,7 @@ import './Calculator.css'
 export const Calculator=()=>{
 
     let value1=Number(0)
-    let value2=Number(-99999999999)
-    // let key_value=[]
+    let value2=Number(0)
     let divClicked=false
     let addClicked=false
     let subClicked=false
@@ -56,10 +55,18 @@ export const Calculator=()=>{
     }
 
     const ceClicked=()=>{
+        let answer_text=document.getElementById('calculator_answer').value
         document.getElementById('calculator_answer').value=""
+        let ongoing_text=document.getElementById('calculator_ongoing_hidden').textContent
+        let ongoing_symbol=ongoing_text.slice(ongoing_text.length-1)
+        if((ongoing_symbol!=='+' && ongoing_symbol!=='-' && ongoing_symbol!=='÷' && ongoing_symbol!=='%' && ongoing_symbol!=='*')){
+            document.getElementById('calculator_ongoing_hidden').textContent=ongoing_text.slice(0, answer_text.length+1)
+        }
+
     }
 
     const cClicked=()=>{
+        document.getElementById('calculator_ongoing_hidden').textContent=""
         document.getElementById('calculator_answer').value=""
         value1=0
         value2=0
@@ -123,7 +130,7 @@ export const Calculator=()=>{
     
 
     const divisionClicked=()=>{
-        if(!divClicked && value2===Number(-99999999999)){
+        if(!divClicked){
             value1=Number(document.getElementById('calculator_answer').value)
             document.getElementById('calculator_answer').value=''
             divClicked=true
@@ -132,6 +139,7 @@ export const Calculator=()=>{
             document.getElementById('division').className = "calculator-actionButton-selected"
             document.getElementById('addition').className = "calculator-actionButton"
             value2=0
+            document.getElementById('calculator_ongoing_hidden').textContent=value1+"÷"
         }
         else{
             value2=Number(document.getElementById('calculator_answer').value)
@@ -141,12 +149,14 @@ export const Calculator=()=>{
             document.getElementById('multiplication').className = "calculator-actionButton"
             document.getElementById('division').className = "calculator-actionButton"
             document.getElementById('addition').className = "calculator-actionButton"
-            value2=Number(-99999999999)
+            document.getElementById('calculator_ongoing_hidden').textContent=value1+"÷"+value2
+            value1=0
+            value2=0
         }
     }
 
     const additionClicked=()=>{
-        if(!addClicked && value2===Number(-99999999999)){
+        if(!addClicked){
             value1=Number(document.getElementById('calculator_answer').value)
             document.getElementById('calculator_answer').value=''
             addClicked=true
@@ -155,6 +165,7 @@ export const Calculator=()=>{
             document.getElementById('division').className = "calculator-actionButton"
             document.getElementById('addition').className = "calculator-actionButton-selected"
             value2=0
+            document.getElementById('calculator_ongoing_hidden').textContent=value1+"+"
         }
         else{
             value2=document.getElementById('calculator_answer').value
@@ -164,12 +175,14 @@ export const Calculator=()=>{
             document.getElementById('multiplication').className = "calculator-actionButton"
             document.getElementById('division').className = "calculator-actionButton"
             document.getElementById('addition').className = "calculator-actionButton"
-            value2=Number(-99999999999)
+            document.getElementById('calculator_ongoing_hidden').textContent=value1+"+"+value2
+            value1=0
+            value2=0
         }
     }
 
     const subtractionClicked=()=>{
-        if(!subClicked && value2===Number(-99999999999)){
+        if(!subClicked){
             value1=Number(document.getElementById('calculator_answer').value)
             document.getElementById('calculator_answer').value=''
             subClicked=true
@@ -178,6 +191,7 @@ export const Calculator=()=>{
             document.getElementById('division').className = "calculator-actionButton"
             document.getElementById('addition').className = "calculator-actionButton"
             value2=0
+            document.getElementById('calculator_ongoing_hidden').textContent=value1+"-"
         }
         else{
             value2=document.getElementById('calculator_answer').value
@@ -187,12 +201,15 @@ export const Calculator=()=>{
             document.getElementById('multiplication').className = "calculator-actionButton"
             document.getElementById('division').className = "calculator-actionButton"
             document.getElementById('addition').className = "calculator-actionButton"
-            value2=Number(-99999999999)
+            document.getElementById('calculator_ongoing_hidden').textContent=value1+"-"+value2
+            value1=0
+            value2=0
+
         }
     }
 
     const multiplicationClicked=()=>{
-        if(!mulClicked && value2===Number(-99999999999)){
+        if(!mulClicked){
             value1=Number(document.getElementById('calculator_answer').value)
             document.getElementById('calculator_answer').value=''
             mulClicked=true
@@ -201,6 +218,7 @@ export const Calculator=()=>{
             document.getElementById('division').className = "calculator-actionButton"
             document.getElementById('addition').className = "calculator-actionButton"
             value2=0
+            document.getElementById('calculator_ongoing_hidden').textContent=value1+"*"
         }
         else{
             value2=document.getElementById('calculator_answer').value
@@ -210,11 +228,14 @@ export const Calculator=()=>{
             document.getElementById('multiplication').className = "calculator-actionButton"
             document.getElementById('division').className = "calculator-actionButton"
             document.getElementById('addition').className = "calculator-actionButton"
-            value2=Number(-99999999999)
+            document.getElementById('calculator_ongoing_hidden').textContent=value1+"*"+value2
+            value1=0
+            value2=0
         }
     }
 
     const equalClicked=()=>{
+        document.getElementById('calculator_ongoing_hidden').textContent=''
         document.getElementById('subtraction').className = "calculator-actionButton"
         document.getElementById('multiplication').className = "calculator-actionButton"
         document.getElementById('division').className = "calculator-actionButton"
@@ -223,25 +244,21 @@ export const Calculator=()=>{
             value2=document.getElementById('calculator_answer').value
             document.getElementById('calculator_answer').value=Number(value1)/Number(value2)
             divClicked=false
-            value2=Number(-99999999999)
         }
         if(addClicked){
             value2=document.getElementById('calculator_answer').value
             document.getElementById('calculator_answer').value=Number(value1)+Number(value2)
             addClicked=false
-            value2=Number(-99999999999)
         }
         if(subClicked){
             value2=document.getElementById('calculator_answer').value
             document.getElementById('calculator_answer').value=Number(value1)-Number(value2)
             subClicked=false
-            value2=Number(-99999999999)
         }
         if(mulClicked){
             value2=document.getElementById('calculator_answer').value
             document.getElementById('calculator_answer').value=Number(value1)*Number(value2)
-            subClicked=false
-            value2=Number(-99999999999)
+            mulClicked=false
         }
     }
 
@@ -297,6 +314,7 @@ export const Calculator=()=>{
                         <button className='calculator-actionButton' onClick={equalClicked} style={{backgroundColor:"#eaecec", color:"#000"}}>=</button>
                     </div>
                 </div>
+                <span className='calculator-ongoing' id='calculator_ongoing_hidden'></span>
             </div>
         </div>
     )
